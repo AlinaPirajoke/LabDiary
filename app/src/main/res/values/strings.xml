@@ -1,0 +1,17 @@
+<resources>
+    <string name="a">a</string>
+    <string name="error">ОШИБКА!</string>
+
+    <string name="app_name">LabDiary</string>
+    <string name="confirmed_date">выполненно до</string>
+    <string name="today">сегодня</string>
+    <string name="semester">семестр</string>
+
+    <string name="awesome_result">Легендарен!!!</string>
+    <string name="good_result">Хорошо идёшь!</string>
+    <string name="average_result">"Этого мало!</string>
+    <string name="not_good_result">Отстаёшь, отстаёшь</string>
+    <string name="bad_result">Эээ, бля, ты жив ещё?</string>
+
+
+</resources>
