@@ -13,5 +13,28 @@
     <string name="not_good_result">Отстаёшь, отстаёшь</string>
     <string name="bad_result">Эээ, бля, ты жив ещё?</string>
 
+    <string name="which_lab_was_done">Какая лаба была выполнена?</string>
+    <string name="add_lab">Отметить лабу как выполненную</string>
+    <string name="add_discipline">Добавить дисциплину</string>
 
+    <string name="adding_new_discipline">Добавьте дисциплину</string>
+    <string name="name_field">Название</string>
+    <string name="labs_quantity_field">Общее количество лаб</string>
+    <string name="confirm">Подтвердить</string>
+
+    <string name="completed_labs">Выполненные лабы</string>
+    <string name="delete">Удалить</string>
+    <string name="deletion_confirm">Вы действительно хотите отменить выполнение?</string>
+    <string name="answer_yes">Да, удалить</string>
+    <string name="answer_no">Нет, не удалять</string>
+
+    <string name="main_page">Главная</string>
+    <string name="completed_labs_page">История</string>
+    <string name="add_lab_page">Добавить</string>
+    <string name="settings_page">Настройки</string>
+
+    <string name="next_semester">Следующий семестр</string>
+    <string name="current_semester">Текущий семестр:</string>
+    <string name="dis_quantity">Количество дисциплин в этом семестре:</string>
+    <string name="dis_list">Список дисциплин</string>
 </resources>

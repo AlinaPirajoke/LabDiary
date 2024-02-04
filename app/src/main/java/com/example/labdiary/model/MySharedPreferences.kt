@@ -15,7 +15,7 @@ class MySharedPreferences(context: Context) {
             Log.i(TAG, "semester: $v")
             return v
         }
-        set(sem: Int){
+        set(sem: Int) {
             field = sem
             sp.edit().putInt("semester", sem).apply()
             Log.i(TAG, "semester: $sem")

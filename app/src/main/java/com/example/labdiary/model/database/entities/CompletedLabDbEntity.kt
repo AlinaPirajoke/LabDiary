@@ -1,4 +1,4 @@
-package com.example.labdiary.model.database
+package com.example.labdiary.model.database.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -19,5 +19,6 @@ import androidx.room.PrimaryKey
 data class CompletedLabDbEntity(
     @PrimaryKey(autoGenerate = true) val id: Int,
     @ColumnInfo(name = "discipline_id") val discipline: Int,
-    @ColumnInfo(name = "number") val name: Int,
+    @ColumnInfo(name = "number") val number: Int,
+    @ColumnInfo(name = "_date") val date: String,
 )

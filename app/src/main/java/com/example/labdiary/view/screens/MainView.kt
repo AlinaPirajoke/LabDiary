@@ -1,4 +1,4 @@
-package com.example.labdiary.view
+package com.example.labdiary.view.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,14 +24,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.labdiary.R
 import com.example.labdiary.theme.LabDiaryCustomTheme
+import com.example.labdiary.view.Screens
 import com.example.labdiary.viewModel.MainViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun MainScreen(
-    //navController: NavHostController,
+    navController: NavHostController,
     vm: MainViewModel = koinViewModel()
 ) {
     val uiState by vm.uiState.collectAsState()
@@ -41,9 +43,10 @@ fun MainScreen(
         confirmedDate = uiState.doneUntil,
         semester = uiState.curSemester,
         result = uiState.resultGrade,
-        toAdd = {},
-        toHistory = {},
-        toSettings = {})
+        toAddLab = {navController.navigate(Screens.AddLab.route)},
+        toCompleted = {navController.navigate(Screens.Completed.route)},
+        toSettings = {}
+    )
 }
 
 @Composable
@@ -52,17 +55,17 @@ fun MainView(
     confirmedDate: String,
     semester: Int,
     result: Int,
-    toAdd: () -> Unit,
+    toAddLab: () -> Unit,
     toSettings: () -> Unit,
-    toHistory: () -> Unit,
+    toCompleted: () -> Unit,
 ) {
     Surface(color = MaterialTheme.colors.background) {
-        Scaffold(
-            Modifier.padding(vertical = 20.dp, horizontal = 16.dp),
-            backgroundColor = MaterialTheme.colors.background,
-            floatingActionButton = { MainFloatingActionButtons(toAdd, toHistory, toSettings) }
-        ) {
-            print(it.toString())
+//        Scaffold(
+//            Modifier.padding(vertical = 20.dp, horizontal = 16.dp),
+//            backgroundColor = MaterialTheme.colors.background,
+//            floatingActionButton = { MainFloatingActionButtons(toAddLab, toCompleted, toSettings) }
+//        ) {
+//            print(it.toString())
             Column(
                 Modifier
                     .fillMaxSize(),
@@ -76,7 +79,7 @@ fun MainView(
                     result = result
                 )
             }
-        }
+//        }
     }
 }
 
@@ -90,9 +93,9 @@ fun DatesBlock(currentDate: String, confirmedDate: String, result: Int) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         ConfirmedDate(date = confirmedDate)
-        Divider(color = MaterialTheme.colors.primary)
+        Divider(Modifier.padding(horizontal = 20.dp), color = MaterialTheme.colors.primary)
         TodayDate(date = currentDate)
-        Divider(color = MaterialTheme.colors.primary)
+        Divider(Modifier.padding(horizontal = 20.dp), color = MaterialTheme.colors.primary)
         ResultLabel(result = result)
     }
 }
@@ -101,27 +104,32 @@ fun DatesBlock(currentDate: String, confirmedDate: String, result: Int) {
 fun ResultLabel(result: Int) {
     val resultImg: ImageVector
     val resultString: String
-    when(result){
+    when (result) {
         1 -> {
             resultImg = ImageVector.vectorResource(R.drawable.awesome)
             resultString = stringResource(id = R.string.awesome_result)
         }
+
         2 -> {
             resultImg = ImageVector.vectorResource(R.drawable.good)
             resultString = stringResource(id = R.string.good_result)
         }
+
         3 -> {
             resultImg = ImageVector.vectorResource(R.drawable.average)
             resultString = stringResource(id = R.string.average_result)
         }
+
         4 -> {
             resultImg = ImageVector.vectorResource(R.drawable.not_good)
             resultString = stringResource(id = R.string.not_good_result)
         }
+
         5 -> {
             resultImg = ImageVector.vectorResource(R.drawable.bad)
             resultString = stringResource(id = R.string.bad_result)
         }
+
         else -> {
             resultImg = ImageVector.vectorResource(R.drawable.bad)
             resultString = stringResource(id = R.string.error)
@@ -148,7 +156,7 @@ fun ResultLabel(result: Int) {
 
 @Composable
 fun SemesterLabel(semester: Int) {
-    Row(Modifier.padding(start = 14.dp), verticalAlignment = Alignment.Bottom) {
+    Row(Modifier.padding(start = 14.dp, top = 8.dp), verticalAlignment = Alignment.Bottom) {
         Text(
             text = semester.toString(),
             color = MaterialTheme.colors.primary,
@@ -197,30 +205,6 @@ fun TodayDate(date: String) {
         )
     }
 }
-
-/*@Composable
-fun monthCalendar(name: String, dayQuantity: Int, confirmedQuantity: Int) {
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Divider(Modifier.width(100.dp))
-            Text(text = name, textAlign = TextAlign.Center)
-            Divider(Modifier.width(100.dp))
-        }
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(5),
-            contentPadding = PaddingValues(15.dp, 15.dp, 15.dp, 15.dp)
-        ) {
-
-        }
-    }
-}*/
 
 @Composable
 fun MainFloatingActionButtons(
@@ -271,12 +255,12 @@ fun MyFAB(img: ImageVector, descr: String, onClick: () -> Unit) {
 fun MainViewPreview() {
     LabDiaryCustomTheme {
         MainView(
-            currentDate = "2024-03-12",
-            confirmedDate = "2024-03-10",
+            currentDate = "12 апреля 2024",
+            confirmedDate = "10 апреля 2024",
             semester = 6,
             result = 3,
-            toAdd = {},
-            toHistory = {},
+            toAddLab = {},
+            toCompleted = {},
             toSettings = {})
     }
 }
